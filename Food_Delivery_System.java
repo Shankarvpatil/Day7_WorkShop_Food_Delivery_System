@@ -1,47 +1,51 @@
 package com.bridglabz;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.Objects;
-
-interface IVeg {}
-
-interface INonVeg{}
-public abstract class FoodItems {
-	enum Test{ SPICY, SWEET, CRISPPY, CHEESY};
-	enum Category{MAINCOURSE, STARTER, JUICE};
-	enum Type{VEG, NONVEG}
+public class FoodManager {
+	Set<FoodItems> foodList = new HashSet();
 	
-	String name;
-	Type type;
-	Category catagory;
-	Test tast;
-	short preparationTime;
-	float price;
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(catagory, name, preparationTime, price, tast, type);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		FoodItems other = (FoodItems) obj;
-		return catagory == other.catagory && Objects.equals(name, other.name)
-				&& preparationTime == other.preparationTime
-				&& Float.floatToIntBits(price) == Float.floatToIntBits(other.price) && tast == other.tast
-				&& type == other.type;
-	}
-
-	@Override
-	public String toString() {
-		return "FoodItems [name=" + name + ", type=" + type + ", catagory=" + catagory + ", tast=" + tast
-				+ ", preparationTime=" + preparationTime + ", price=" + price + "]";
+	void addFoodItems(FoodItems foodItem) {
+		foodList.add(foodItem);
 	}
 	
-	public abstract void printIngredients();
+	void printFoodItems() {
+		for(FoodItems Items: foodList) {
+			System.out.println(Items);
+		}
+	}
+	
+	void removeItem(FoodItems foodItem) {
+		foodList.remove(foodItem);
+	}
+	
+	void printAllVegItems() {
+		for(FoodItems elements: foodList) {
+			if(elements instanceof IVeg) 
+				System.out.println(elements);
+		}
+	}
+	public int getFoodCount() {
+		return foodList.size();
+	}
+	
+	void printAllNonVegItems() {
+		for(FoodItems elements: foodList) {
+			if(elements instanceof INonVeg) 
+				System.out.println(elements);
+		}
+	}
+	FoodItems getFoodItem(String name) {
+		Iterator iterator = foodList.iterator();
+		for(FoodItems elements : foodList ) {
+			if (iterator.hasNext()) {
+				FoodItems fooditem = (FoodItems) iterator.next();
+				if(fooditem.name.equalsIgnoreCase(name)) {
+					return fooditem;
+				}
+			}		
+		}
+		return null;	
+	}
 }
