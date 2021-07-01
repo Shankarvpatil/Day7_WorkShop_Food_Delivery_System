@@ -1,16 +1,16 @@
 package com.bridglabz;
 
-public class AppleJuice extends FoodItems implements IVeg {
-	public AppleJuice() {
-		type = Type.VEG ;
-		catagory = Category.JUICE;
-		tast = Test.SWEET;
-		preparationTime = 10;
-		name = "AppleJuice";
+public class Biryani extends FoodItems implements INonVeg {
+	public Biryani() {
+		type = Type.NONVEG ;
+		catagory = Category.MAINCOURSE ;
+		tast = Test.SPICY;
+		preparationTime = 40;
+		name = "Biryani";
 	}
 
 	@Override
 	public void printIngredients() {
-		System.out.println("Applejuice ingredients");
+		System.out.println("biryani ingredients");
 	}
 }
